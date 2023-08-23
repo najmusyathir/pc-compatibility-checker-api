@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from router import cpu_GET
 from router import cpu_POST
+from router import dataHandler
 
 # reload - uvicorn main:app --reload
 
 app = FastAPI()
 app.include_router(cpu_GET.router)
 app.include_router(cpu_POST.router)
+app.include_router(dataHandler.router)
 
 # basic function
 @app.get('/', tags=['Default'])
