@@ -6,6 +6,7 @@
 # 4. Install uvicorn >pip install fastapi
 # 5. Check installation success >uvicorn --version
 # 6. Running uvicorn >uvicorn main:app --reload
+# Extra note: Syntax to get all requirement installation: pip freeze > requirements.txt
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

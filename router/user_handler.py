@@ -1,8 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List
+import logging
 import json
 import os 
+import httpx
+import base64
 
 router = APIRouter(prefix="/input", tags=["Data Handler"])
 
@@ -45,7 +48,7 @@ async def show_inputs(item_details_list: List[ItemDetails]):
     user_data.extend(new_entries)
     
         # Read the existing data from the file
-    with open(os.path.join("data-set", "userDataSet.json"), "r") as f:
+    with open(os.path.join("data-set", "input_training_dataset.json"), "r") as f:
         existing_data = f.read()
 
     # Remove the last character (which should be a "]")
@@ -58,9 +61,41 @@ async def show_inputs(item_details_list: List[ItemDetails]):
     updated_data = existing_data + "," +cleaned_new_data + "]"
 
     # Save the updated userDataSet back to the JSON file
-    with open(os.path.join("data-set", "userDataSet.json"), "w") as f:
+    logging.debug("Saving updated userDataSet to JSON file")
+    with open(os.path.join("data-set", "input_training_dataset.json"), "w") as f:
         f.write(updated_data)
 
     # You can also send a response back
     # return {"message": "Data received and appended successfully"}
+    
+        # Update the file in the GitHub repository
+    repo_owner = "najmusyathir"  # Replace with your GitHub username or organization name
+    repo_name = "pc-compatibility-checker-api"  # Replace with your GitHub repository name
+    file_path_in_repo = "data-set/input_training_dataset.json"  # Specify the path to the file in your repository
+    access_token = "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"  # Your personal access token
+
+# Convert the JSON data to bytes and then Base64 encode it
+    updated_data_bytes = updated_data.encode("utf-8")
+    updated_data_base64 = base64.b64encode(updated_data_bytes).decode("utf-8")
+
+    update_data = {
+        "message": "Update input_training_dataset.json",
+        "content": updated_data_base64
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.put(
+            f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path_in_repo}",
+            json=update_data,
+            headers={"Authorization": f"Bearer {access_token}"}
+        )
+
+        # Handle the response
+        if response.status_code == 200:
+            return {"message": "Data received, appended, and updated successfully on GitHub"}
+        else:
+            # Log the response from GitHub, including the response body
+            logging.debug(f"GitHub response: {response.status_code} - {response.text}")
+            raise HTTPException(status_code=500, detail=response.text)
+
 
