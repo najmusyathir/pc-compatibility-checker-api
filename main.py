@@ -1,7 +1,4 @@
-from router import cpu_GET
-from router import cpu_POST
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+
 
 # 1. Implement venv >python -m venv fastapi-venv
 # 2. Activate the venv >C:\*\Scripts\activate.bat
@@ -12,10 +9,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from router import cpu_GET
-from router import cpu_POST
-from router import dataHandler
-
+from router import cpu_handler
+from router import mb_handler
+from router import user_handler
 
 app = FastAPI()
 
@@ -35,9 +31,9 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(cpu_GET.router)
-app.include_router(cpu_POST.router)
-app.include_router(dataHandler.router)
+app.include_router(cpu_handler.router)
+app.include_router(mb_handler.router)
+app.include_router(user_handler.router)
 
 
 # Default route
