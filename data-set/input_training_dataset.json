@@ -1,208 +1,208 @@
 [
-    {
-      "data": {
-        "title": "Intel 13th Gen Intel Core i9 Series Processor - 13900F/13900/13900KF/13900K/13900KS",
-        "sku": "Intel, Model:i9-13900KF",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/0ab79970f9afd5b7784c2f925699131d.jpg",
-        "component_type": "cpu"
-      }
+  {
+    "data": {
+      "title": "Intel 13th Gen Intel Core i9 Series Processor - 13900F/13900/13900KF/13900K/13900KS",
+      "sku": "Intel, Model:i9-13900KF",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/0ab79970f9afd5b7784c2f925699131d.jpg",
+      "component_type": "cpu"
     }
-  ,
-    {
-      "data": {
-        "title": "REDMAGIC 4K Gaming Monitor | Mini LED Backlight Technology | 4K UHD 160 HZ | Eye Protection",
-        "sku": "REDMAGIC",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/62937d23ac5054a530188d0fe1018810.jpg",
-        "component_type": "monitor"
-      }
-    },
-    {
-      "data": {
-        "title": "[INTEL] MSI ASUS GIGABYTE Z790 Z690 ATX MATX ITX MOTHERBOARD",
-        "sku": "MSI (Micro Star), MODEL:MSI Z690 PRO D4, SIZE:ATX",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/17941d38a1b677b1901456d44b39d17d.jpg",
-        "component_type": "mb"
-      }
-    },
-    {
-      "data": {
-        "title": "Colorful iGame GeForce RTX 4070 TI Ultra W OC-V Graphic Card",
-        "sku": "COLORFUL",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/2fbb78280d852b15c5cd0a81b327d5e7.jpg",
-        "component_type": "gpu"
-      }
-    },
-    {
-      "data": {
-        "title": "Gigabyte GeForce RTX 4060 WINDFORCE OC 8GB GDDR6",
-        "sku": "Gigabyte",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/030d4d793623a6328defd8cb2d62488d.jpg",
-        "component_type": "gpu"
-      }
+  }
+,
+  {
+    "data": {
+      "title": "REDMAGIC 4K Gaming Monitor | Mini LED Backlight Technology | 4K UHD 160 HZ | Eye Protection",
+      "sku": "REDMAGIC",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/62937d23ac5054a530188d0fe1018810.jpg",
+      "component_type": "monitor"
     }
-  ,
-    {
-      "data": {
-        "title": "ASUS DUAL GeForce RTX 4060 OC Edition 8GB GDDR6 Graphics Card",
-        "sku": "ASUS",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/fbe88e71bf74c1a84155871808c4c581.jpg",
-        "component_type": ""
-      }
-    },
-    {
-      "data": {
-        "title": "MSI MPG B760I EDGE WIFI DDR4 Mini-ITX Gaming Motherboard + Intel 13th Gen Processor Combo",
-        "sku": "MSI, Option:M/B Only",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/345d07453229369ba571e484e0baac6c.jpg",
-        "component_type": ""
-      }
+  },
+  {
+    "data": {
+      "title": "[INTEL] MSI ASUS GIGABYTE Z790 Z690 ATX MATX ITX MOTHERBOARD",
+      "sku": "MSI (Micro Star), MODEL:MSI Z690 PRO D4, SIZE:ATX",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/17941d38a1b677b1901456d44b39d17d.jpg",
+      "component_type": "mb"
     }
-  ,
-    {
-      "data": {
-        "title": "ASUS DUAL GeForce RTX 4060 OC Edition 8GB GDDR6 Graphics Card",
-        "sku": "ASUS",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/fbe88e71bf74c1a84155871808c4c581.jpg",
-        "component_type": ""
-      }
-    },
-    {
-      "data": {
-        "title": "MSI MPG B760I EDGE WIFI DDR4 Mini-ITX Gaming Motherboard + Intel 13th Gen Processor Combo",
-        "sku": "MSI, Option:M/B Only",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/345d07453229369ba571e484e0baac6c.jpg",
-        "component_type": ""
-      }
+  },
+  {
+    "data": {
+      "title": "Colorful iGame GeForce RTX 4070 TI Ultra W OC-V Graphic Card",
+      "sku": "COLORFUL",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/2fbb78280d852b15c5cd0a81b327d5e7.jpg",
+      "component_type": "gpu"
     }
-  ,
-    {
-      "data": {
-        "title": "Flexi Tech JONSBO V10 Tempered Glass ITX Black / Silver High-Performance PC Casing Desktop Casing",
-        "sku": "Jonsbo, Color Family:Silver",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/e60e669b88df809849bfe242cfcbd2a4.png",
-        "component_type": ""
-      }
-    },
-    {
-      "data": {
-        "title": "MSI MPG B760I EDGE WIFI DDR4 Mini-ITX Gaming Motherboard + Intel 13th Gen Processor Combo",
-        "sku": "MSI, Option:M/B Only",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/345d07453229369ba571e484e0baac6c.jpg",
-        "component_type": ""
-      }
+  },
+  {
+    "data": {
+      "title": "Gigabyte GeForce RTX 4060 WINDFORCE OC 8GB GDDR6",
+      "sku": "Gigabyte",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/030d4d793623a6328defd8cb2d62488d.jpg",
+      "component_type": "gpu"
     }
-  ,
-    {
-      "data": {
-        "title": "REDMAGIC 4K Gaming Monitor | Mini LED Backlight Technology | 4K UHD 160 HZ | Eye Protection",
-        "sku": "REDMAGIC",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/62937d23ac5054a530188d0fe1018810.jpg",
-        "component_type": ""
-      }
-    },
-    {
-      "data": {
-        "title": "Colorful iGame GeForce RTX 4070 TI Ultra W OC-V Graphic Card",
-        "sku": "COLORFUL",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/2fbb78280d852b15c5cd0a81b327d5e7.jpg",
-        "component_type": ""
-      }
+  }
+,
+  {
+    "data": {
+      "title": "ASUS DUAL GeForce RTX 4060 OC Edition 8GB GDDR6 Graphics Card",
+      "sku": "ASUS",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/fbe88e71bf74c1a84155871808c4c581.jpg",
+      "component_type": ""
     }
-  ,
-    {
-      "data": {
-        "title": "REDMAGIC 4K Gaming Monitor | Mini LED Backlight Technology | 4K UHD 160 HZ | Eye Protection",
-        "sku": "REDMAGIC",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/62937d23ac5054a530188d0fe1018810.jpg",
-        "component_type": ""
-      }
-    },
-    {
-      "data": {
-        "title": "Colorful iGame GeForce RTX 4070 TI Ultra W OC-V Graphic Card",
-        "sku": "COLORFUL",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/2fbb78280d852b15c5cd0a81b327d5e7.jpg",
-        "component_type": ""
-      }
-    },
-    {
-      "data": {
-        "title": "Gigabyte GeForce RTX 4060 WINDFORCE OC 8GB GDDR6",
-        "sku": "Gigabyte",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/030d4d793623a6328defd8cb2d62488d.jpg",
-        "component_type": ""
-      }
+  },
+  {
+    "data": {
+      "title": "MSI MPG B760I EDGE WIFI DDR4 Mini-ITX Gaming Motherboard + Intel 13th Gen Processor Combo",
+      "sku": "MSI, Option:M/B Only",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/345d07453229369ba571e484e0baac6c.jpg",
+      "component_type": ""
     }
-  ,
-    {
-      "data": {
-        "title": "REDMAGIC 4K Gaming Monitor | Mini LED Backlight Technology | 4K UHD 160 HZ | Eye Protection",
-        "sku": "REDMAGIC",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/62937d23ac5054a530188d0fe1018810.jpg",
-        "component_type": ""
-      }
-    },
-    {
-      "data": {
-        "title": "Colorful iGame GeForce RTX 4070 TI Ultra W OC-V Graphic Card",
-        "sku": "COLORFUL",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/2fbb78280d852b15c5cd0a81b327d5e7.jpg",
-        "component_type": ""
-      }
-    },
-    {
-      "data": {
-        "title": "Gigabyte GeForce RTX 4060 WINDFORCE OC 8GB GDDR6",
-        "sku": "Gigabyte",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/030d4d793623a6328defd8cb2d62488d.jpg",
-        "component_type": ""
-      }
+  }
+,
+  {
+    "data": {
+      "title": "ASUS DUAL GeForce RTX 4060 OC Edition 8GB GDDR6 Graphics Card",
+      "sku": "ASUS",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/fbe88e71bf74c1a84155871808c4c581.jpg",
+      "component_type": ""
     }
-  ,
-    {
-      "data": {
-        "title": "REDMAGIC 4K Gaming Monitor | Mini LED Backlight Technology | 4K UHD 160 HZ | Eye Protection",
-        "sku": "REDMAGIC",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/62937d23ac5054a530188d0fe1018810.jpg",
-        "component_type": ""
-      }
-    },
-    {
-      "data": {
-        "title": "Colorful iGame GeForce RTX 4070 TI Ultra W OC-V Graphic Card",
-        "sku": "COLORFUL",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/2fbb78280d852b15c5cd0a81b327d5e7.jpg",
-        "component_type": ""
-      }
-    },
-    {
-      "data": {
-        "title": "Gigabyte GeForce RTX 4060 WINDFORCE OC 8GB GDDR6",
-        "sku": "Gigabyte",
-        "checkbox": true,
-        "img": "https://my-live.slatic.net/p/030d4d793623a6328defd8cb2d62488d.jpg",
-        "component_type": ""
-      }
+  },
+  {
+    "data": {
+      "title": "MSI MPG B760I EDGE WIFI DDR4 Mini-ITX Gaming Motherboard + Intel 13th Gen Processor Combo",
+      "sku": "MSI, Option:M/B Only",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/345d07453229369ba571e484e0baac6c.jpg",
+      "component_type": ""
     }
-  ]
+  }
+,
+  {
+    "data": {
+      "title": "Flexi Tech JONSBO V10 Tempered Glass ITX Black / Silver High-Performance PC Casing Desktop Casing",
+      "sku": "Jonsbo, Color Family:Silver",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/e60e669b88df809849bfe242cfcbd2a4.png",
+      "component_type": ""
+    }
+  },
+  {
+    "data": {
+      "title": "MSI MPG B760I EDGE WIFI DDR4 Mini-ITX Gaming Motherboard + Intel 13th Gen Processor Combo",
+      "sku": "MSI, Option:M/B Only",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/345d07453229369ba571e484e0baac6c.jpg",
+      "component_type": ""
+    }
+  }
+,
+  {
+    "data": {
+      "title": "REDMAGIC 4K Gaming Monitor | Mini LED Backlight Technology | 4K UHD 160 HZ | Eye Protection",
+      "sku": "REDMAGIC",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/62937d23ac5054a530188d0fe1018810.jpg",
+      "component_type": ""
+    }
+  },
+  {
+    "data": {
+      "title": "Colorful iGame GeForce RTX 4070 TI Ultra W OC-V Graphic Card",
+      "sku": "COLORFUL",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/2fbb78280d852b15c5cd0a81b327d5e7.jpg",
+      "component_type": ""
+    }
+  }
+,
+  {
+    "data": {
+      "title": "REDMAGIC 4K Gaming Monitor | Mini LED Backlight Technology | 4K UHD 160 HZ | Eye Protection",
+      "sku": "REDMAGIC",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/62937d23ac5054a530188d0fe1018810.jpg",
+      "component_type": ""
+    }
+  },
+  {
+    "data": {
+      "title": "Colorful iGame GeForce RTX 4070 TI Ultra W OC-V Graphic Card",
+      "sku": "COLORFUL",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/2fbb78280d852b15c5cd0a81b327d5e7.jpg",
+      "component_type": ""
+    }
+  },
+  {
+    "data": {
+      "title": "Gigabyte GeForce RTX 4060 WINDFORCE OC 8GB GDDR6",
+      "sku": "Gigabyte",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/030d4d793623a6328defd8cb2d62488d.jpg",
+      "component_type": ""
+    }
+  }
+,
+  {
+    "data": {
+      "title": "REDMAGIC 4K Gaming Monitor | Mini LED Backlight Technology | 4K UHD 160 HZ | Eye Protection",
+      "sku": "REDMAGIC",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/62937d23ac5054a530188d0fe1018810.jpg",
+      "component_type": ""
+    }
+  },
+  {
+    "data": {
+      "title": "Colorful iGame GeForce RTX 4070 TI Ultra W OC-V Graphic Card",
+      "sku": "COLORFUL",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/2fbb78280d852b15c5cd0a81b327d5e7.jpg",
+      "component_type": ""
+    }
+  },
+  {
+    "data": {
+      "title": "Gigabyte GeForce RTX 4060 WINDFORCE OC 8GB GDDR6",
+      "sku": "Gigabyte",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/030d4d793623a6328defd8cb2d62488d.jpg",
+      "component_type": ""
+    }
+  }
+,
+  {
+    "data": {
+      "title": "REDMAGIC 4K Gaming Monitor | Mini LED Backlight Technology | 4K UHD 160 HZ | Eye Protection",
+      "sku": "REDMAGIC",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/62937d23ac5054a530188d0fe1018810.jpg",
+      "component_type": ""
+    }
+  },
+  {
+    "data": {
+      "title": "Colorful iGame GeForce RTX 4070 TI Ultra W OC-V Graphic Card",
+      "sku": "COLORFUL",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/2fbb78280d852b15c5cd0a81b327d5e7.jpg",
+      "component_type": ""
+    }
+  },
+  {
+    "data": {
+      "title": "Gigabyte GeForce RTX 4060 WINDFORCE OC 8GB GDDR6",
+      "sku": "Gigabyte",
+      "checkbox": true,
+      "img": "https://my-live.slatic.net/p/030d4d793623a6328defd8cb2d62488d.jpg",
+      "component_type": ""
+    }
+  }
+]
