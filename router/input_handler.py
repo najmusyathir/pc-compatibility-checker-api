@@ -1,11 +1,13 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List
+import hashlib
 import logging
 import json
 import os 
 import httpx
 import base64
+from nlp.nlp_tester import nlp_title_classification
 
 router = APIRouter(prefix="/input", tags=["Data Handler"])
 
@@ -16,8 +18,20 @@ class ItemDetails(BaseModel):
     checkbox: bool
     img: str
 
+#Identify component scope
+@router.post("/component_identidier")
+async def component_identifier(item_details_list: List[ItemDetails]):
 
-@router.post("/show_inputs")
+    item_identifications =[]
+
+    for item_details in item_details_list:
+        item_identifications.append(nlp_title_classification(item_details.title))
+    
+    return item_identifications
+
+# Show input and push data into github
+# !!! In maintenance !!!
+@router.post("/show_inputs") 
 async def show_inputs(item_details_list: List[ItemDetails]):
     # Process input data
     # Load existing data from the JSON file
@@ -62,28 +76,47 @@ async def show_inputs(item_details_list: List[ItemDetails]):
 
     # Save the updated userDataSet back to the JSON file
     logging.debug("Saving updated userDataSet to JSON file")
-    with open(os.path.join("data-set", "input_training_dataset.json"), "w") as f:
-        f.write(updated_data)
-
-    # You can also send a response back
-    # return {"message": "Data received and appended successfully"}
     
-        # Update the file in the GitHub repository
+    #Save the data only if it is successful >> code below
+    # with open(os.path.join("data-set", "input_training_dataset.json"), "w") as f:
+    #     f.write(updated_data)
+
+    
+    # Update the file in the GitHub repository
     repo_owner = "najmusyathir"  # Replace with your GitHub username or organization name
     repo_name = "pc-compatibility-checker-api"  # Replace with your GitHub repository name
     file_path_in_repo = "data-set/input_training_dataset.json"  # Specify the path to the file in your repository
-    access_token = "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"  # Your personal access token
+    access_token = "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"  # Your personal access token
 
-# Convert the JSON data to bytes and then Base64 encode it
+    # Convert the JSON data to bytes and then Base64 encode it
     updated_data_bytes = updated_data.encode("utf-8")
     updated_data_base64 = base64.b64encode(updated_data_bytes).decode("utf-8")
-
-    update_data = {
-        "message": "Update input_training_dataset.json",
-        "content": updated_data_base64
-    }
-
+    
+    # Fetch the latest commit SHA for the repository (replace 'main' with your branch name)
     async with httpx.AsyncClient() as client:
+    # Fetch the latest commit SHA for the repository (replace 'main' with your branch name)
+        latest_commit_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/commits/main"
+        latest_commit_response = await client.get(latest_commit_url, headers={"Authorization": f"Bearer {access_token}"})
+        latest_commit_data = latest_commit_response.json()
+        latest_commit_sha = latest_commit_data["sha"]
+
+        # Fetch the content of the existing file
+        existing_file_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path_in_repo}"
+        existing_file_response = await client.get(existing_file_url, headers={"Authorization": f"Bearer {access_token}"})
+        existing_file_data = existing_file_response.json()
+        existing_file_sha = existing_file_data["sha"]
+
+        # Check if the file content matches the SHA
+        if existing_file_sha != latest_commit_sha:
+            raise HTTPException(status_code=409, detail="File has been modified by someone else.")
+
+        # If the file content matches, proceed with the update
+        update_data = {
+            "message": "Update input_training_dataset.json",
+            "sha": existing_file_sha,  # Use the SHA from the existing file
+            "content": updated_data_base64
+        }
+
         response = await client.put(
             f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{file_path_in_repo}",
             json=update_data,
@@ -92,10 +125,9 @@ async def show_inputs(item_details_list: List[ItemDetails]):
 
         # Handle the response
         if response.status_code == 200:
-            return {"message": "Data received, appended, and updated successfully on GitHub"}
+            with open(os.path.join("data-set", "input_training_dataset.json"), "w") as f:
+                f.write(updated_data)
         else:
             # Log the response from GitHub, including the response body
             logging.debug(f"GitHub response: {response.status_code} - {response.text}")
             raise HTTPException(status_code=500, detail=response.text)
-
-

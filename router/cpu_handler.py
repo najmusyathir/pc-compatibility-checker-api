@@ -101,7 +101,7 @@ def set_family(
         alias="familyID",
         deprecated=True,
     ),
-    content: str = Body("Max 1000 words here", max_length=100, regex="^[a-z\s]*$")
+    content: str = Body("Max 1000 words here", max_length=100, regex="^[a-z\\s]*$")
     # use Ellipsis / ... to set required
     # learn more about regex
 ):
