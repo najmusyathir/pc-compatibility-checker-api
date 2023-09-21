@@ -1,14 +1,14 @@
-from fastapi import APIRouter, status, Response
-from enum import Enum
-from typing import Optional
+from fastapi import APIRouter
 import json
+import re
 
 router = APIRouter(prefix="/mb", tags=["Motherboards"])
 
+#Load mb_dataset
+with open("data-set/mb_dataset.json", "r") as file:
+    mb_data = json.load(file)
 
-@router.get(
-    "/all",
-)  # Implement the sections
+@router.get("/all")  
 def get_all():
     # description
     """
@@ -24,52 +24,36 @@ def get_all():
 
     return {"mb_names": mb_names}
 
+@router.get("/{mb_chipset}")
+def get_mb_socket(mb_chipset: str):
+    mb_pattern = rf'.*{re.escape(mb_chipset)}.*'
 
-# get function
-@router.get("/{id}")
-def get_id(id: int):
-    return {"message": f"the mb was: {id}"}
+    for mb in mb_data:
+        if re.search(mb_pattern, mb["name"], re.IGNORECASE):
+            return mb["socket"]
 
+    return "Socket not found"
 
-# predefine values
-class MbFamily(str, Enum):
-    intel = "intel"
-    AMD = "amd"
-
-
-@router.get("/family/{family}")
-def get_mb_family(family: MbFamily):
-    return {"message": f"Motherboard family: {family.value}"}
+        
 
 
-@router.get("/{family}/{model}", tags=["Motherboard Model"])
-def get_mb_name(family: MbFamily, model):
-    return {"message": f"the mb model of {family.value} is {model}"}
+@router.post("/model/{title}")
+def mb_model_identifier(title):
+    model = extract_mb_chipset(title)
+    return model
 
 
-# query values include some functions
-@router.get(
-    "/core/{mbModel}", status_code=status.HTTP_404_NOT_FOUND, tags=["Motherboard Model"]
-)
-def get_core_counts(
-    mbModel="",
-    core=2,
-    threads: Optional[int] = None,
-    avaibility: bool = False,
-    response=Response,
-):
-    if mbModel == "":
-        return {"message": "Motherboard model required"}
-    else:
-        if threads is None:
-            if avaibility is True:
-                return {"message": f"Core count of {mbModel} is {int(core)} of core/s"}
-            else:
-                return {"message": "Item unavailable"}
+
+# Regular functions 
+def extract_mb_chipset(title):
+        # Regular expression to match AMD mb model patterns
+        mb_pattern = r'\b[a-zA-Z]?\d{3,4}[a-zA-Z]?[3]?[a-zA-Z]?\b'
+    
+        # Extract AMD mb models from the title
+        mb_models = re.findall(mb_pattern, title, re.IGNORECASE)
+        mb_models = [''.join(filter(None, match)) for match in mb_models]
+        if not mb_models:
+                return "Model unidentified"
         else:
-            if avaibility is True:
-                return {
-                    "message": f"Core count of {mbModel} is {int(core)} of core/s and {int(threads)} of threads"
-                }
-            else:
-                return {"message": "Items unavailable"}
+                return mb_models[0]
+

@@ -1,0 +1,8 @@
+version: '3'  # Version of the Docker Compose syntax being used
+
+services:
+  web:  # Service name
+    build: .  # Build context for the Docker image (current directory)
+    command: sh -c "uvicorn main:app --reload --port 8000 --host 0.0.0.0"  # Command to start your FastAPI app
+    ports:
+      - 8000:8000  # Port mapping (host:container)

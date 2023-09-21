@@ -2,13 +2,18 @@ from fastapi import APIRouter, status, Response
 from enum import Enum
 from typing import Optional
 import json
+import re
 
 router = APIRouter(prefix="/cpu", tags=["CPUs"])
 
+# Load cpu_dataset
+with open("data-set/cpu_dataset.json", "r") as file:
+    cpu_data = json.load(file)
 
+ # Get All CPU List
 @router.get(
     "/all",
-)  # Implement the sections
+) 
 def get_all():
     # description
     """
@@ -18,36 +23,96 @@ def get_all():
     - core counts
     - tread counts
     """
-    with open("data-set/cpu_dataset.json", "r") as file:
-        cpu_data = json.load(file)
-        cpu_details = [
-            {"name": cpu["name"], "socket": cpu["socket"]} for cpu in cpu_data
-        ]
-
-        return {"cpu_details": cpu_details}
+    cpu_details = [
+        {"name": cpu["name"], "socket": cpu["socket"]} for cpu in cpu_data
+    ]
+    return {"cpu_details": cpu_details}
 
 
-# get function
-@router.get("/{id}")
-def get_id(id: int):
-    return {"message": f"the cpu was: {id}"}
+
+def get_cpu_socket(cpu_model):
+    cpu_model_words = cpu_model.split()
+    
+    for cpu in cpu_data:
+        name_lower = cpu["name"].lower()
+        if all(word.lower() in name_lower for word in cpu_model_words):
+            return f"{cpu['socket']}"
+
+    return "Socket not found"
+    
+
+@router.get("amd/{cpu_model}")
+def get_amd_socket(cpu_model):
+    cpu_model_words = cpu_model.split()  # Split the input into individual words
+
+    for cpu in cpu_data:
+        name_words = cpu["name"].lower().split()
+        if all(word.lower() in name_words for word in cpu_model_words):
+            output = cpu["socket"]+": " +cpu["name"]
+            return output
+
+    return "Socket not found"
 
 
-# predefine values
-class CpuFamily(str, Enum):
-    intel = "intel"
-    AMD = "amd"
+# Regular Function
+
+def cpu_family_identifier(title):
+
+    if  "intel"in title.lower() and "amd" in title.lower():
+        return "Error: Family identifier Error"
+
+    elif "intel" in title.lower():
+        model = extract_intel_models(title)
+        return model
+    
+    elif "amd" in title.lower():
+        model = extract_amd_models(title)
+        return model
+
+    else:
+        model = extract_intel_models(title)
+        if model is None:
+            model = extract_amd_models(title)
+            if model is None:
+                return "Error: CPU Family not found"
+            else:
+                return "AMD "+model
+
+        return "intel "+model
+
+def extract_intel_models(title):
+        
+    family = re.findall(r'\b(celeron|pentium|xeon|[iI][3579])\b', title, re.IGNORECASE)
+
+    # Extract AMD CPU models from the title
+    intel_models = re.findall(r'\b\s?[- ]?([a-zA-Z]?\d{4,5}[a-zA-Z]?[a-zA-Z]?)\b', title, re.IGNORECASE)
+
+    if not intel_models:
+        return "Intel model unidentified"
+    else:
+        if intel_models:
+            return f"{family[0]} {' '.join(intel_models)}"
+        else:
+            return ', '.join(intel_models)
 
 
-@router.get("/family/{family}")
-def get_cpu_family(family: CpuFamily):
-    return {"message": f"CPU family: {family.value}"}
+def extract_amd_models(title):
+    # Regular expression to match AMD CPU model patterns
+    family = re.findall(r'\b(Athlon|Ryzen|Threadripper|Epyc)\b', title, re.IGNORECASE)
+
+    # Extract AMD CPU models from the title
+    amd_models = re.findall(r'\b\d{3,4}[a-zA-Z]?[3]?[a-zA-Z]?\b', title, re.IGNORECASE)
+
+    if not amd_models:
+        return "AMD model unidentified"
+    else:
+        if family:
+            return f"AMD {family[0]} {' '.join(amd_models)}"
+        else:
+            return "AMD " + ', '.join(amd_models)
 
 
-@router.get("/{family}/{model}", tags=["CPU Model"])
-def get_cpu_name(family: CpuFamily, model):
-    return {"message": f"the cpu model of {family.value} is {model}"}
-
+# Not using yet or not using at all
 
 # query values include some functions
 @router.get(
@@ -77,32 +142,8 @@ def get_core_counts(
                 }
             else:
                 return {"message": "Items unavailable"}
+    
 
 
-"""
-@router.post("/new")
-def declare_new_cpu(cpu: cpuModel):
-    return cpu
 
-
-@router.post("/new/{modelID}")
-def declare_new_cpu(cpu: cpuModel, modelID: int):
-    return {"id": modelID, "modelID": cpu}
-
-
-@router.post("/new/{modelID}/family")
-def set_family(
-    cpu: cpuModel,
-    modelID: str,
-    family_id: str = Query(
-        None,
-        title="intel inc.",
-        description="big company that make develop CPUs architechture",
-        alias="familyID",
-        deprecated=True,
-    ),
-    content: str = Body("Max 1000 words here", max_length=100, regex="^[a-z\\s]*$")
-    # use Ellipsis / ... to set required
-    # learn more about regex
-):
-    return {"id": modelID, "modelID": cpu, "familyID": family_id, "content": content}"""
+    

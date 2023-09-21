@@ -1,7 +1,5 @@
 import joblib
-from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
-
 
 def nlp_title_classification(title):
         # Load the trained model and TF-IDF vectorizer
@@ -29,7 +27,5 @@ def nlp_title_classification(title):
         predicted_class = classes[np.argmax(predicted_probabilities > threshold)]
 
                 # Display the final classification
-        print(f'\nProduct title: {title}\nClass: {predicted_class}\n')
+        print(f'Product title: {title}\nClass: {predicted_class}')
         return predicted_class
-
-        

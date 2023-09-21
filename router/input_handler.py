@@ -1,13 +1,16 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List
+from nlp.nlp_implementation import nlp_title_classification
+from router.cpu_handler import cpu_family_identifier, get_cpu_socket
+from router.mb_handler import mb_model_identifier, get_mb_socket
+
 import hashlib
 import logging
 import json
 import os 
 import httpx
 import base64
-from nlp.nlp_tester import nlp_title_classification
 
 router = APIRouter(prefix="/input", tags=["Data Handler"])
 
@@ -19,15 +22,96 @@ class ItemDetails(BaseModel):
     img: str
 
 #Identify component scope
-@router.post("/component_identidier")
+@router.post("/component_identifier")
 async def component_identifier(item_details_list: List[ItemDetails]):
+    print("\nReceive request from extension: Funtion is running: \n")
 
-    item_identifications =[]
+    new_entries = []
+    new_entries2 = []
+    cpu_socket = ""
+    mb_socket = ""
 
+    #Output Message
+    compatible = "Item compatible"
+    incompatible =  "Error: Item incompatible. Please check CPU Socket.\n"
+
+    # Fill the component_type in input data
     for item_details in item_details_list:
-        item_identifications.append(nlp_title_classification(item_details.title))
+        com_type = nlp_title_classification(item_details.title)
+        new_entry = {
+                "title": item_details.title,
+                "sku": item_details.sku,
+                "checkbox": item_details.checkbox,
+                "img": item_details.img,
+                "com_type": com_type,
+            }
+        new_entries.append(new_entry)
+
+    # Find the component_model after fetch the component_type
+    for entry in new_entries:
+        com_type = entry['com_type']
+
+        if com_type == "cpu":
+            title = entry['title']
+            cpu_model = cpu_family_identifier(title)
+            
+            cpu_socket = get_cpu_socket(cpu_model)
+
+            new_entry = { "cpu":{
+                    "title": entry['title'],  
+                    "sku": entry['sku'],  
+                    "checkbox": entry['checkbox'],  
+                    "img": entry['img'],  
+                    "com_type": entry['com_type'],  
+                    "cpu_model": cpu_model,
+                    "cpu_socket": cpu_socket
+                }
+            }
+            new_entries2.append(new_entry)
+
+        elif com_type == "mb":
+            title = entry['title']
+            mb_chipset = mb_model_identifier(title)
+            mb_socket = get_mb_socket(mb_chipset)
+
+            if mb_socket is None:
+                mb_socket = "Socket not found"
+
+            new_entry = { "mb":
+                {
+                    "title": entry['title'],  
+                    "sku": entry['sku'],  
+                    "checkbox": entry['checkbox'],  
+                    "img": entry['img'],  
+                    "com_type": entry['com_type'],  
+                    "mb_chipset": mb_chipset,
+                    "mb_socket": mb_socket
+                }
+            }
+            new_entries2.append(new_entry)
+
     
-    return item_identifications
+    if cpu_socket.lower() == mb_socket.lower():
+        print(compatible, "\nSocket type: ", cpu_socket.upper())
+        output = compatible
+
+    else:
+         print(incompatible,"\nCPU Socket: ",cpu_socket, "\nMB Socket: ",mb_socket)
+         output = incompatible
+
+    output_entry = {
+            "output": output,
+            "cpu_socket": cpu_socket.upper(),
+            "mb_socket": mb_socket.upper()
+        }
+    new_entries2.append(output_entry)
+
+    
+
+    return new_entries2
+
+# // Funtions
+
 
 # Show input and push data into github
 # !!! In maintenance !!!
@@ -53,7 +137,7 @@ async def show_inputs(item_details_list: List[ItemDetails]):
                 "sku": item_details.sku,
                 "checkbox": item_details.checkbox,
                 "img": item_details.img,
-                "component_type": "",
+                "com_type": "",
             },
         }
         new_entries.append(new_entry)
@@ -131,3 +215,5 @@ async def show_inputs(item_details_list: List[ItemDetails]):
             # Log the response from GitHub, including the response body
             logging.debug(f"GitHub response: {response.status_code} - {response.text}")
             raise HTTPException(status_code=500, detail=response.text)
+
+
