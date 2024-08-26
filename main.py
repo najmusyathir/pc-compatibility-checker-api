@@ -6,6 +6,7 @@
 # 6. Running uvicorn >uvicorn main:app --reload
 # Extra note:
 # Syntax to get all requirement installation: pip freeze > requirements.txt
+# Can install all requirement in requirements.txt: pip3 install -r requirements.txt
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
